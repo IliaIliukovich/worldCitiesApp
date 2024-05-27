@@ -12,7 +12,7 @@ public class City {
 
     private String name;
 
-    private double population;
+    private Integer population;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CountryCode")
