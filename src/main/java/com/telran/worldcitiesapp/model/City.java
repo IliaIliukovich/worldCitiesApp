@@ -12,6 +12,8 @@ public class City {
 
     private String name;
 
+    private String district;
+
     private Integer population;
 
     @ManyToOne(fetch = FetchType.LAZY)
