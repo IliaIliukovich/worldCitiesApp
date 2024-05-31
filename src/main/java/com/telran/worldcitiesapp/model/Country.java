@@ -8,11 +8,13 @@ import lombok.Setter;
 
 import java.util.List;
 
+import java.io.Serializable;
+
 @Data
 @Getter
 @Setter
 @Entity
-public class Country {
+public class Country implements Serializable {
 
     @Id
     private String code;

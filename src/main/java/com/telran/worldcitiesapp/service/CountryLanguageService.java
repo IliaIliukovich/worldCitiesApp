@@ -10,10 +10,22 @@ import java.util.List;
 @Service
 public class CountryLanguageService {
 
-    @Autowired
-    private CountryLanguageRepository countryLanguageRepository;
+    private CountryLanguageRepository repository;
 
-    public List<CountryLanguage> getAllLanguages() {
-        return countryLanguageRepository.findAll();
+    @Autowired
+    public CountryLanguageService(CountryLanguageRepository repository) {
+        this.repository = repository;
+    }
+
+
+    public List<CountryLanguage> getAllCountryLanguages() {
+        return repository.findAll();
+    }
+
+    @Override
+    public String toString() {
+        return "CountryLanguageService{" +
+                "repository=" + repository +
+                '}';
     }
 }

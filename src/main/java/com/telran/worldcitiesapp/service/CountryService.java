@@ -13,7 +13,8 @@ public class CountryService {
     @Autowired
     private CountryRepository repository;
 
-    public List<Country> getAll() {
+
+    public List<Country> getAllCountries() {
         return repository.findAll();
     }
 

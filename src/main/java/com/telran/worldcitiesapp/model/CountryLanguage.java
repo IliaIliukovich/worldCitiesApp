@@ -1,22 +1,26 @@
 package com.telran.worldcitiesapp.model;
 
+import com.telran.worldcitiesapp.model.enums.IsOfficial;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Data
-@Getter
-@Setter
 @Entity
+@Data
+@IdClass(CompositePrimaryKeys.class)
 public class CountryLanguage {
+
     @Id
-//    private String countryCode;
+    private String countryCode;
+
+    @Id
     private String language;
-    private Boolean isOfficial;
-    private Double percentage;
+
+    @Enumerated(EnumType.STRING)
+    private IsOfficial isOfficial;
+
+    private double percentage;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CountryCode")
+    @JoinColumn(name="CountryCode", nullable=false)
     private Country country;
 }
