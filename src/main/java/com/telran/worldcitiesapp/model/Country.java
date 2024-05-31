@@ -1,17 +1,17 @@
 package com.telran.worldcitiesapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.io.Serializable;
 
 @Data
 @Entity
-public class Country {
+public class Country implements Serializable {
 
     @Id
     private String code;
 
     private String name;
-
 
 }

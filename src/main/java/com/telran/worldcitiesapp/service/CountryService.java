@@ -2,7 +2,6 @@ package com.telran.worldcitiesapp.service;
 
 import com.telran.worldcitiesapp.model.Country;
 import com.telran.worldcitiesapp.repository.CountryRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,8 @@ public class CountryService {
         this.repository = repository;
     }
 
-    public List<Country> getAll() {
+
+    public List<Country> getAllCountries() {
         return repository.findAll();
     }
 
