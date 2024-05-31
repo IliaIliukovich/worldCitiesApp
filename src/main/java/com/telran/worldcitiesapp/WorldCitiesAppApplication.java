@@ -24,17 +24,18 @@ public class WorldCitiesAppApplication {
         System.out.println(service);
 //        service.getAll().forEach(System.out::println);
 
-//        Country country = new Country();
-//        country.setCode("AAA");
-//        country.setName("Antarktida");
-//        service.addCountry(country);
+        Country country = new Country();
+        country.setCode("AAA");
+        country.setName("Antarctica");
+        service.addCountry(country);
 
         City city = new City();
       //  city.setId(1111111L);
-        city.setName("San Francisco");
-        city.setPopulation(1234567);
+        city.setName("Antarctica station");
+        city.setPopulation(10);
+        city.setDistrict("Antarctica district");
 
-        Country country = countryRepository.getReferenceById("AAA");
+        country = countryRepository.getReferenceById("AAA");
         city.setCountry(country);
         cityService.addCity(city);
     }
