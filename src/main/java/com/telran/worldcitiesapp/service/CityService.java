@@ -1,6 +1,7 @@
 package com.telran.worldcitiesapp.service;
 
 import com.telran.worldcitiesapp.model.City;
+import com.telran.worldcitiesapp.model.Country;
 import com.telran.worldcitiesapp.repository.CityRepository;
 import com.telran.worldcitiesapp.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,15 @@ public class CityService {
     public List<City> getAllCities() {
         return repository.findAll();
     }
+
+    public List<City> getAllCitiesByCoutry(String code) {
+        return repository.findCitiesByCountryCode(code);
+    }
+
+    public void addCity(City city) {
+        repository.save(city);
+    }
+
 
     @Override
     public String toString() {

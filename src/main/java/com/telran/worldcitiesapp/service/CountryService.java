@@ -8,29 +8,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-//@AllArgsConstructor
 public class CountryService {
 
-    private CountryRepository repository;
-
-//    public void setRepository(CountryRepository repository) {
-//        this.repository = repository;
-//    }
-
     @Autowired
-    public CountryService(CountryRepository repository) {
-        this.repository = repository;
-    }
+    private CountryRepository repository;
 
 
     public List<Country> getAllCountries() {
         return repository.findAll();
     }
 
-    @Override
-    public String toString() {
-        return "CountryService{" +
-                "repository=" + repository +
-                '}';
+    public void addCountry(Country country) {
+        repository.save(country);
     }
+
 }
