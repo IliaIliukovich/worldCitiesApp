@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class CountryLanguageService {
 
-    private CountryLanguageRepository repository;
+    private final CountryLanguageRepository repository;
 
     @Autowired
     public CountryLanguageService(CountryLanguageRepository repository) {
@@ -20,6 +20,10 @@ public class CountryLanguageService {
 
     public List<CountryLanguage> getAllCountryLanguages() {
         return repository.findAll();
+    }
+
+    public List<CountryLanguage> getAllCountryLanguagesByCountryCode(String code) {
+        return repository.findCountryLanguagesByCountryCode(code);
     }
 
     @Override

@@ -11,8 +11,12 @@ import java.util.List;
 @RestController
 public class CityController {
 
+    private final CityService service;
+
     @Autowired
-    private CityService service;
+    public CityController(CityService service) {
+        this.service = service;
+    }
 
     @GetMapping("/allCities")
     public List<City> getAll() {
@@ -21,7 +25,7 @@ public class CityController {
 
     @GetMapping("/allCitiesByCountry")
     public List<City> getAllByCountry(@RequestParam(name = "code") String code) {
-        return service.getAllCitiesByCoutry(code);
+        return service.getAllCitiesByCountry(code);
     }
 
 }

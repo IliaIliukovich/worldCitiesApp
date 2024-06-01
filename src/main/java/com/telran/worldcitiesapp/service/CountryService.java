@@ -10,9 +10,12 @@ import java.util.List;
 @Service
 public class CountryService {
 
-    @Autowired
-    private CountryRepository repository;
+    private final CountryRepository repository;
 
+    @Autowired
+    public CountryService(CountryRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Country> getAllCountries() {
         return repository.findAll();

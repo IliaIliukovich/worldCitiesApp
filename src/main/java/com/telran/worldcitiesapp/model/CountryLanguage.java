@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@IdClass(CompositePrimaryKeys.class)
+@IdClass(CountryLanguagePk.class)
 public class CountryLanguage {
 
     @Id

@@ -10,8 +10,12 @@ import java.util.List;
 @RestController
 public class CountryController {
 
+    private final CountryService service;
+
     @Autowired
-    private CountryService service;
+    public CountryController(CountryService service) {
+        this.service = service;
+    }
 
     @GetMapping("/allCountries")
     public List<Country> getAll() {
