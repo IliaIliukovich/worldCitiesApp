@@ -20,7 +20,7 @@ public class CountryLanguage {
 
     private double percentage;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="CountryCode", nullable=false)
-    private Country country;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="CountryCode", nullable=false)
+//    private Country country;
 }
