@@ -48,6 +48,7 @@ public class CityService {
     }
 
     public void deleteCity(Long id) {
+
         repository.deleteById(id);
     }
 
