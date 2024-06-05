@@ -65,4 +65,11 @@ public class CityServiceTest {
         service.addCity(city3,"324");
         Mockito.verify(repository, Mockito.times(1)).save(city3);
     }
+
+    @Test
+    public void testGetAllByCountry() {
+        String code = "skksksddkdk";
+        service.getAllCitiesByCountry(code);
+        Mockito.verify(repository).findCitiesByCountryCode(code);
+    }
 }

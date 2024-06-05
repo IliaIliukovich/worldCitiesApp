@@ -3,6 +3,7 @@ package com.telran.worldcitiesapp.model;
 import com.telran.worldcitiesapp.model.enums.IsOfficial;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 @Entity
 @Data
