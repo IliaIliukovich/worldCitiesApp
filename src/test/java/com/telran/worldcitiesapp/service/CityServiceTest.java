@@ -76,7 +76,7 @@ public class CityServiceTest {
 
         Mockito.when(cityRepository.findById(wrongId)).thenReturn(Optional.empty());
         City city3 = cityService.updateCityPopulation(wrongId, population);
-        assertEquals(null, city3);
+        assertNull(city3);
     }
 
     @Test
