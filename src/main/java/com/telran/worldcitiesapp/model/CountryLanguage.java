@@ -7,6 +7,8 @@ import lombok.Getter;
 
 @Entity
 @Data
+@Table (name = "countrylanguage")
+
 @IdClass(CountryLanguagePk.class)
 public class CountryLanguage {
 
