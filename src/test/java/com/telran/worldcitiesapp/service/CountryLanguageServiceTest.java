@@ -4,7 +4,6 @@ import com.telran.worldcitiesapp.model.CountryLanguage;
 import com.telran.worldcitiesapp.model.CountryLanguagePk;
 import com.telran.worldcitiesapp.model.enums.IsOfficial;
 import com.telran.worldcitiesapp.repository.CountryLanguageRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -63,14 +62,29 @@ public class CountryLanguageServiceTest {
 
     @Test
     public void updateCountryLanguage() {
-        String countryCode = "TNZ";
-        String language = "Suahilli";
-        double percentage = 79;
-        boolean isOfficial = false;
-        CountryLanguage updateCountryLanguage  = countryLanguageService.updateCountryLanguage(countryCode,language,percentage,isOfficial);
-        System.out.println(updateCountryLanguage);
-        Assertions.assertEquals(percentage,updateCountryLanguage.getPercentage());
-        Assertions.assertEquals(isOfficial,updateCountryLanguage.getIsOfficial());
+        CountryLanguage countryLanguage1 = new CountryLanguage();
+        countryLanguage1.setLanguage("language");
+        countryLanguage1.setPercentage(1);
+        countryLanguage1.setCountryCode("code");
+        countryLanguage1.setIsOfficial(IsOfficial.T);
+        Mockito.when(countryLanguageRepository.findById(any()))
+                .thenReturn(Optional.of(countryLanguage1))
+                .thenReturn(Optional.of(countryLanguage1))
+                .thenReturn(Optional.empty());
+        Mockito.when(countryLanguageRepository.save(countryLanguage1)).thenReturn(countryLanguage1);
+
+        CountryLanguage updated = countryLanguageService.updateCountryLanguage("code", "language", 2, false);
+        assertEquals(2, updated.getPercentage());
+        assertEquals(IsOfficial.F, updated.getIsOfficial());
+
+        updated = countryLanguageService.updateCountryLanguage("code", "language", 3, true);
+        assertEquals(3, updated.getPercentage());
+        assertEquals(IsOfficial.T, updated.getIsOfficial());
+
+        updated = countryLanguageService.updateCountryLanguage("notValidCode", "notValidLanguage", 4, false);
+        assertNull(updated);
+
+        Mockito.verify(countryLanguageRepository, Mockito.times(2)).save(countryLanguage1);
     }
 
     @Test

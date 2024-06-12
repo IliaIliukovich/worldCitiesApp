@@ -10,12 +10,8 @@ import java.util.List;
 @RestController
 public class CityController {
 
-    private final CityService service;
-
     @Autowired
-    public CityController(CityService service) {
-        this.service = service;
-    }
+    private CityService service;
 
     @GetMapping("/allCities")
     public List<City> getAll() {
