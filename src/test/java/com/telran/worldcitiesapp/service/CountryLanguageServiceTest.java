@@ -1,6 +1,7 @@
 package com.telran.worldcitiesapp.service;
 
 import com.telran.worldcitiesapp.model.CountryLanguage;
+import com.telran.worldcitiesapp.model.CountryLanguagePk;
 import com.telran.worldcitiesapp.model.enums.IsOfficial;
 import com.telran.worldcitiesapp.repository.CountryLanguageRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 public class CountryLanguageServiceTest {
@@ -39,7 +39,9 @@ public class CountryLanguageServiceTest {
         list = new ArrayList<>();
         list.add(countryLanguage1);
         list.add(countryLanguage2);
-        Mockito.when(countryLanguageRepository.findAll()).thenReturn(list); }
+        Mockito.when(countryLanguageRepository.findAll()).thenReturn(list);
+        Mockito.when(countryLanguageRepository.findById(any())).thenReturn(Optional.of(countryLanguage1));
+    };
 
     @Test void getAllCountryLanguages() {
         List<CountryLanguage> countryLanguageList = countryLanguageService.getAllCountryLanguages();
@@ -87,7 +89,29 @@ public class CountryLanguageServiceTest {
 
     @Test
     public void deleteCountryLanguage() {
-        countryLanguageService.deleteCountryLanguage("code", "language");
-        Mockito.verify(countryLanguageRepository, Mockito.times(1)).deleteById(any());
+        String countryCode = "2525hdjj";
+        String language = "pret";
+        countryLanguageService.deleteCountryLanguage(countryCode,language);
+        Mockito.verify(countryLanguageRepository).deleteById(any());
     }
+
+//    @Test
+//
+//    public void testGetAllByCountry() {
+//        String code = "skksksddkdk";
+//        service.getAllCitiesByCountry(code);
+//        Mockito.verify(repository).findCitiesByCountryCode(code);
+//
+//    }
 }
+
+
+//        CountryLanguagePk pk = new CountryLanguagePk(countryCode, language);
+//        Optional<CountryLanguage> languageOptional = repository.findById(pk);
+//        if (languageOptional.isPresent()) {
+//            CountryLanguage countryLanguage = languageOptional.get();
+//            countryLanguage.setPercentage(percentage);
+//            countryLanguage.setIsOfficial(isOfficial ? IsOfficial.T : IsOfficial.F);
+//            return repository.save(countryLanguage);
+//        }
+//       return null;

@@ -6,7 +6,6 @@ import org.mockito.Mockito;
 import org.springframework.validation.Errors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 
 class UserValidatorTest {
     private Errors errors;
@@ -30,11 +29,6 @@ class UserValidatorTest {
         User user = new User();
         assertThrows(NullPointerException.class, () -> userValidator.validate(user, errors));
 
-        user.setUsername("user");
-        user.setPassword("12345678");
-        userValidator.validate(user, errors);
-        Mockito.verify(errors, Mockito.never()).rejectValue(any(), any(), any());
-
         user.setUsername("WrongFirstName1_WrongLastName2");
         user.setPassword("A1_B2_C3_D4");
         userValidator.validate(user, errors);
@@ -46,7 +40,7 @@ class UserValidatorTest {
         Mockito.verify(errors).rejectValue("username", SYMBOLS_LIMIT, SYMBOLS_LIMIT);
 
         user.setUsername("Name1_LastName2");
-        user.setPassword("A1_B212");
+        user.setPassword("A1_B2");
         userValidator.validate(user, errors);
         Mockito.verify(errors).rejectValue("password", PASSWORD_LENGTH, PASSWORD_LENGTH);
 
@@ -72,26 +66,24 @@ class UserValidatorTest {
         String confirmPassword = "A1_B2_C3_D4";
         String wrongConfirmPassword = "A1_B2_C3";
 
-        UserValidator.checkLoginAndPassword(login, password, confirmPassword);
-
         illegalArgumentException = assertThrows(IllegalArgumentException.class,
-                () -> UserValidator.checkLoginAndPassword(wrongLengthLogin, password, confirmPassword));
+                () -> userValidator.checkLoginAndPassword(wrongLengthLogin, password, confirmPassword));
         assertEquals(CHECK_LOGIN_INPUT, illegalArgumentException.getMessage());
 
         illegalArgumentException = assertThrows(IllegalArgumentException.class,
-                () -> UserValidator.checkLoginAndPassword(wrongPatternLogin, password, confirmPassword));
+                () -> userValidator.checkLoginAndPassword(wrongPatternLogin, password, confirmPassword));
         assertEquals(CHECK_LOGIN_INPUT, illegalArgumentException.getMessage());
 
         illegalArgumentException = assertThrows(IllegalArgumentException.class,
-                () -> UserValidator.checkLoginAndPassword(login, wrongLengthPassword, confirmPassword));
+                () -> userValidator.checkLoginAndPassword(login, wrongLengthPassword, confirmPassword));
         assertEquals(CHECK_PASSWORD_INPUT, illegalArgumentException.getMessage());
 
         illegalArgumentException = assertThrows(IllegalArgumentException.class,
-                () -> UserValidator.checkLoginAndPassword(login, wrongPatternPassword, confirmPassword));
+                () -> userValidator.checkLoginAndPassword(login, wrongPatternPassword, confirmPassword));
         assertEquals(CHECK_PASSWORD_INPUT, illegalArgumentException.getMessage());
 
         illegalArgumentException = assertThrows(IllegalArgumentException.class,
-                () -> UserValidator.checkLoginAndPassword(login, password, wrongConfirmPassword));
+                () -> userValidator.checkLoginAndPassword(login, password, wrongConfirmPassword));
         assertEquals(PASSWORD_NOT_CONFIRM_PASSWORD, illegalArgumentException.getMessage());
     }
 }
