@@ -3,6 +3,8 @@ package com.telran.worldcitiesapp.controller;
 import com.telran.worldcitiesapp.model.City;
 import com.telran.worldcitiesapp.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,12 +25,14 @@ public class CityController {
         return service.getAllCitiesByCountry(code);
     }
     @PostMapping("/insertCity")
-    public void addCity(@RequestBody City city, @RequestParam String countryCode) {
+    public ResponseEntity<?> addCity(@RequestBody City city, @RequestParam String countryCode) {
         service.addCity(city, countryCode);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PatchMapping
-    public City updateCity(@RequestParam long id,@RequestParam int population){
-        return service.updateCityPopulation(id,population);
+    public ResponseEntity<City> updateCity(@RequestParam long id, @RequestParam int population){
+        City city = service.updateCityPopulation(id, population);
+        return new ResponseEntity<>(city, HttpStatus.ACCEPTED);
     }
     @DeleteMapping
     public void deleteCity(@RequestParam long id){

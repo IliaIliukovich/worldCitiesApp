@@ -3,9 +3,7 @@ package com.telran.worldcitiesapp.controller;
 import com.telran.worldcitiesapp.model.CountryLanguage;
 import com.telran.worldcitiesapp.service.CountryLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +25,23 @@ public class CountryLanguageController {
     @GetMapping("/allCountryLanguagesByCountry")
     public List<CountryLanguage> getAllByCountry(@RequestParam(name = "code") String code) {
         return service.getAllCountryLanguagesByCountryCode(code);
+    }
+
+    @PostMapping
+    public void addCountryLanguage (@RequestBody CountryLanguage countryLanguage) {
+        service.addCountryLanguage(countryLanguage);
+    }
+    @PatchMapping
+    public CountryLanguage updateCountryLanguage(@RequestParam String countryCode,
+                                                 @RequestParam String language,
+                                                 @RequestParam double percentage,
+                                                 @RequestParam boolean isOfficial ) {
+        return service.updateCountryLanguage(countryCode, language, percentage,isOfficial);
+    }
+
+    @DeleteMapping
+    public  void deleteCountryLanguage(@RequestParam String countryCode,
+                                       @RequestParam String language) {
+        service.deleteCountryLanguage(countryCode,language);
     }
 }
