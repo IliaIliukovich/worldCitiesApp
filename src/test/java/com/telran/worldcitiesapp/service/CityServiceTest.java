@@ -70,8 +70,9 @@ public class CityServiceTest {
 
         Mockito.when(cityRepository.findById(id)).thenReturn(Optional.of(city2));
         assertEquals(city2.getPopulation(), 800000);
-        cityService.updateCityPopulation(id, population);
-        assertEquals(city2.getPopulation(), population);
+        Mockito.when(cityRepository.save(city2)).thenReturn(city2);
+        City updated = cityService.updateCityPopulation(id, population);
+        assertEquals(updated.getPopulation(), population);
         Mockito.verify(cityRepository, Mockito.times(1)).save(city2);
 
         Mockito.when(cityRepository.findById(wrongId)).thenReturn(Optional.empty());
