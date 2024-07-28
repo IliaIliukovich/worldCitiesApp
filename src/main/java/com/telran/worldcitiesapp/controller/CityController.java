@@ -29,12 +29,12 @@ public class CityController {
         service.addCity(city, countryCode);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    @PatchMapping
+    @PatchMapping("/updateCity")
     public ResponseEntity<City> updateCity(@RequestParam long id, @RequestParam int population){
         City city = service.updateCityPopulation(id, population);
         return new ResponseEntity<>(city, HttpStatus.ACCEPTED);
     }
-    @DeleteMapping
+    @DeleteMapping("/deleteCity")
     public void deleteCity(@RequestParam long id){
         service.deleteCity(id);
     }

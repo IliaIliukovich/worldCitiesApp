@@ -27,11 +27,11 @@ public class CountryLanguageController {
         return service.getAllCountryLanguagesByCountryCode(code);
     }
 
-    @PostMapping
+    @PostMapping("/addCountryLanguage")
     public void addCountryLanguage (@RequestBody CountryLanguage countryLanguage) {
         service.addCountryLanguage(countryLanguage);
     }
-    @PatchMapping
+    @PatchMapping("/updateCountryLanguage")
     public CountryLanguage updateCountryLanguage(@RequestParam String countryCode,
                                                  @RequestParam String language,
                                                  @RequestParam double percentage,
@@ -39,7 +39,7 @@ public class CountryLanguageController {
         return service.updateCountryLanguage(countryCode, language, percentage,isOfficial);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteCountryLanguage")
     public  void deleteCountryLanguage(@RequestParam String countryCode,
                                        @RequestParam String language) {
         service.deleteCountryLanguage(countryCode,language);
